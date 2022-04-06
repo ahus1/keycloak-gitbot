@@ -1,0 +1,43 @@
+= Keycloak GitBot Project
+
+== Purpose of this project
+
+This is a GitHub application that helps maintainers and collaborators in the Keycloak project to handle contributions from the community more efficiently.
+
+Today it can run locally.
+In the future, it might run as a GitHub bot and react automatically to changes on the Keycloak GitHub repository.
+
+Find out how it works in the link:DEVELOPMENT.adoc[DEVELOPMENT] document.
+
+== Running the application locally
+
+=== Configuration
+
+Create a `.env` file with a GitHub username and token.
+Use the `.env.sample` file as an example.
+
+=== Startup
+
+[source,shell script]
+----
+./mvnw compile quarkus:dev
+----
+
+Then point your browser to http://localhost:8080
+
+== Functionality
+
+* Switch between the tabs _Monitor_, _Triage_ and _Ready_.
+
+* See a list of issues with their details in a customized view.
+
+* Click on the title of an issue to open it in a new tab.
+
+* Use the green buttons to automatically add labels and comments.
+
+* Hover over a comment button to see the text and edit it before submitting it.
+
+== Copyright and Licensing
+
+Copyright (C) 2022 Alexander Schwartz and the individual contributors.
+Released under the Apache License, Version 2.0 (see link:LICENSE.txt[LICENSE]).

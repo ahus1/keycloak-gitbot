@@ -1,7 +1,7 @@
 <nav class="navbar" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
         <a class="navbar-item" href="/">
-            <img src="/img/keycloak.svg" width="150" height="28" class="pr-2">GitBot
+            <img src="/img/keycloak.svg" alt="Keycloak" width="150" height="28" class="pr-2">GitBot
         </a>
 
         <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
@@ -19,6 +19,10 @@
 
             <a class="navbar-item" href="/triage">
                 Triage
+            </a>
+
+            <a class="navbar-item" href="/ready">
+                Ready
             </a>
 
             <!--

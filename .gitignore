@@ -12,10 +12,12 @@ release.properties
 bin/
 
 # IntelliJ
-.idea
+.idea/*
 *.ipr
 *.iml
 *.iws
+!.idea/externalDependencies.xml
+!.idea/runConfigurations
 
 # NetBeans
 nb-configuration.xml
@@ -39,4 +41,4 @@ nb-configuration.xml
 .env
 
 # cached GitHub schema
-github-query.graphql
+github-schema.graphql

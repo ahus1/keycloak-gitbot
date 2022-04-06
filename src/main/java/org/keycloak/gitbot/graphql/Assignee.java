@@ -1,5 +1,4 @@
 package org.keycloak.gitbot.graphql;
 
-public class SearchNode {
-
+public class Assignee extends Author {
 }

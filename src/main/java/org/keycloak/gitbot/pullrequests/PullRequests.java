@@ -2,29 +2,17 @@ package org.keycloak.gitbot.pullrequests;
 
 import freemarker.template.Configuration;
 import freemarker.template.TemplateException;
-import io.smallrye.graphql.client.GraphQLClient;
-import io.smallrye.graphql.client.Response;
-import io.smallrye.graphql.client.core.Argument;
-import io.smallrye.graphql.client.core.Document;
-import io.smallrye.graphql.client.dynamic.api.DynamicGraphQLClient;
-import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.jboss.logging.Logger;
-import org.keycloak.gitbot.graphql.PullRequest;
-import org.keycloak.gitbot.graphql.Search;
-import org.keycloak.gitbot.graphql.SearchEdges;
-import org.kohsuke.github.*;
+import org.kohsuke.github.GHRepository;
 
 import javax.inject.Inject;
+import javax.validation.constraints.NotNull;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.io.IOException;
 import java.io.StringWriter;
-import java.util.List;
 import java.util.Map;
-import java.util.Properties;
-import java.util.concurrent.ExecutionException;
 
-import static io.smallrye.graphql.client.core.Document.document;
 import static io.smallrye.graphql.client.core.Field.field;
 import static io.smallrye.graphql.client.core.Operation.operation;
 
@@ -37,10 +25,26 @@ public class PullRequests {
     @Inject
     Configuration configuration;
 
+    @Inject
+    GHRepository repository;
+
     @POST
-    @Path("{pr}/click")
+    @Path("{pr}/addLabel")
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     @Produces(MediaType.TEXT_HTML)
-    public String click(@PathParam("pr") Integer pr) throws IOException, ExecutionException, InterruptedException, TemplateException {
+    public String addLabel(@PathParam("pr") Integer pr, @NotNull @QueryParam("label") String label) throws IOException, TemplateException {
+        repository.getPullRequest(pr).addLabels(label);
+        StringWriter stringWriter = new StringWriter();
+        configuration.getTemplate("completed.html.ftl").process(Map.of(), stringWriter);
+        return stringWriter.toString();
+    }
+
+    @POST
+    @Path("{pr}/addComment")
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    @Produces(MediaType.TEXT_HTML)
+    public String addComment(@PathParam("pr") Integer pr, @NotNull @FormParam("comment") String comment) throws IOException, TemplateException {
+        repository.getPullRequest(pr).comment(comment);
         StringWriter stringWriter = new StringWriter();
         configuration.getTemplate("completed.html.ftl").process(Map.of(), stringWriter);
         return stringWriter.toString();

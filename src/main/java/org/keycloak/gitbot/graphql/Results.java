@@ -4,15 +4,15 @@ import org.eclipse.microprofile.graphql.Enum;
 
 import java.util.List;
 
-public class Search {
+public class Results {
 
-    private List<SearchEdges> edges;
+    private List<Result> edges;
 
-    public List<SearchEdges> getEdges() {
+    public List<Result> getEdges() {
         return edges;
     }
 
-    public void setEdges(List<SearchEdges> edges) {
+    public void setEdges(List<Result> edges) {
         this.edges = edges;
     }
 

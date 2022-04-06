@@ -1,6 +1,6 @@
 package org.keycloak.gitbot.graphql;
 
-public class SearchEdges {
+public class Result {
     private PullRequest node;
 
     public PullRequest getNode() {

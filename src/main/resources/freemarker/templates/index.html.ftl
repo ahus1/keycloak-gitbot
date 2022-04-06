@@ -1,6 +1,6 @@
 <html>
 <head>
-    <title>List of PRs</title>
+    <title>Keycloak GitBot - Welcome</title>
     <#include "header.html.ftl">
 </head>
 <body>

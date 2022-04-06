@@ -1,0 +1,102 @@
+{
+    rateLimit {
+        limit
+        cost
+        remaining
+        resetAt
+    }
+    search(
+        type: ISSUE,
+        query: """
+        is:open is:pr assignee:ahus1 archived:false repo:keycloak/keycloak draft:false sort:updated-desc
+        """,
+        first: 10
+    ) {
+        pageInfo {
+            startCursor,
+            endCursor
+        }
+        edges {
+            node {
+                ... on PullRequest {
+                    number,
+                    url,
+                    id,
+                    title,
+                    body,
+                    createdAt,
+                    updatedAt,
+                    files(first: 20) {
+                        nodes {
+                            path
+                        }
+                    }
+                    commits(first: 10) {
+                        nodes {
+                            commit {
+                                message
+                            }
+                        }
+                    }
+                    commits(first: 10) {
+                        nodes {
+                            commit {
+                                message
+                                oid
+                            }
+                        }
+                    }
+                    comments(first: 10) {
+                        nodes {
+                            body
+                            author {
+                                login
+                                avatarUrl
+                            }
+                        }
+                    }
+                    closingIssuesReferences(first: 10) {
+                        nodes {
+                            number,
+                            url,
+                            labels(first: 10) {
+                                nodes {
+                                    name,
+                                    color,
+                                }
+                            }
+                        }
+                    }
+                    labels(first: 10) {
+                        nodes {
+                            name,
+                            color,
+
+                        }
+                    }
+                    reactions(first: 10) {
+                        nodes {
+                            id,
+                            content,
+                            user {
+                                login
+                            }
+                        }
+                    }
+                    author {
+                        login
+                        avatarUrl
+                    }
+                    authorAssociation
+                    assignees(first: 10) {
+                        nodes {
+                            login
+                            avatarUrl
+                            name
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

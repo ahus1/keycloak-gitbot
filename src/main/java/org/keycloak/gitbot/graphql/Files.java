@@ -2,7 +2,7 @@ package org.keycloak.gitbot.graphql;
 
 import java.util.List;
 
-public class FilesNodes {
+public class Files {
     private List<File> nodes;
 
     public List<File> getNodes() {

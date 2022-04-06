@@ -2,8 +2,8 @@
 <project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>org.acme</groupId>
-  <artifactId>my-github-app</artifactId>
+  <groupId>org.keycloak</groupId>
+  <artifactId>keycloak-gitbot</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <properties>
     <compiler-plugin.version>3.8.1</compiler-plugin.version>
@@ -16,6 +16,7 @@
     <quarkus.platform.version>2.7.5.Final</quarkus.platform.version>
     <surefire-plugin.version>3.0.0-M5</surefire-plugin.version>
     <quarkus.freemarker.version>0.3.0</quarkus.freemarker.version>
+    <quarkus-github-api.version>1.303.1</quarkus-github-api.version>
   </properties>
   <dependencyManagement>
     <dependencies>
@@ -29,11 +30,6 @@
     </dependencies>
   </dependencyManagement>
   <dependencies>
-    <dependency>
-      <groupId>io.quarkiverse.githubapp</groupId>
-      <artifactId>quarkus-github-app</artifactId>
-      <version>1.7.3</version>
-    </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-scheduler</artifactId>
@@ -67,6 +63,21 @@
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-junit5</artifactId>
       <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.ocpsoft.prettytime</groupId>
+      <artifactId>prettytime</artifactId>
+      <version>5.0.2.Final</version>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkiverse.githubapi</groupId>
+      <artifactId>quarkus-github-api</artifactId>
+      <version>${quarkus-github-api.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkiverse.githubapi</groupId>
+      <artifactId>quarkus-github-api-deployment</artifactId>
+      <version>${quarkus-github-api.version}</version>
     </dependency>
   </dependencies>
   <build>
@@ -108,6 +119,18 @@
     </plugins>
   </build>
   <profiles>
+    <profile>
+      <!-- this will eventually evolve into a GitHub App. For this, it requires a QUARKUS_GITHUB_APP_PRIVATE_KEY.
+      To simplify local development in the non-GitHub-App-mode, keep it in a separate profile for now. -->
+      <id>gitbot</id>
+      <dependencies>
+        <dependency>
+          <groupId>io.quarkiverse.githubapp</groupId>
+          <artifactId>quarkus-github-app</artifactId>
+          <version>1.7.4</version>
+        </dependency>
+      </dependencies>
+    </profile>
     <profile>
       <id>native</id>
       <activation>
