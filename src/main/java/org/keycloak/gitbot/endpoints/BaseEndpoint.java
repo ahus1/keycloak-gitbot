@@ -54,6 +54,17 @@ public class BaseEndpoint {
                                                 field("description")
                                         )
                                 ),
+                                field("comments", List.of(
+                                                Argument.arg("first", 10)
+                                        ),
+                                        field("nodes",
+                                                field("body"),
+                                                field("author",
+                                                        field("login"),
+                                                        field("avatarUrl")
+                                                )
+                                        )
+                                ),
                                 field("closingIssuesReferences", List.of(
                                                 Argument.arg("first", 10)
                                         ),
