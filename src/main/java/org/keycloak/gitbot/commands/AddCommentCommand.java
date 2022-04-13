@@ -35,6 +35,10 @@ public class AddCommentCommand extends Command {
     }
 
     public static void checkSingleCommitAndLinkedIssue(PullRequest pullRequest, Configuration configuration) throws IOException, TemplateException {
+        if (pullRequest.getAuthor().getLogin().equals("dependabot")) {
+            // ignore these automated pull requests as this will have no effect.
+            return;
+        }
         boolean missingLinkedIssue = !pullRequest.hasLinkedIssue();
         boolean notSingleCommit = !pullRequest.hasSingleCommit();
         boolean notHadFirstReviewComment = !pullRequest.hasFirstReviewComment();
