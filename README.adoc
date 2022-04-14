@@ -1,7 +1,7 @@
 = Keycloak GitBot Project
 :github: https://github.com/ahus1/keycloak-gitbot
 
-image:{github}/workflows/Build/badge.svg?branch=main[Build Status (GitHub Workflow Build), link={github}/actions?query=workflow%3ABuild+branch%3Amain]
+image:{github}/workflows/Java%20CI%20with%20Maven/badge.svg?branch=main[Build Status (GitHub Workflow Build), link={github}/actions/workflows/build.yml]
 
 == Purpose of this project
 
@@ -39,6 +39,11 @@ Then point your browser to http://localhost:8080
 * Use the green buttons to automatically add labels and comments.
 
 * Hover over a comment button to see the text and edit it before submitting it.
+
+== Limitations
+
+GitHub's GraphQL API is slow when retrieving a large number of elements.
+As this app retrieves a lot of additional fields, the results are limited to 50 PRs as otherwise `SRGQLDC035003: Response did not contain any data` might be returned.
 
 == Copyright and Licensing
 

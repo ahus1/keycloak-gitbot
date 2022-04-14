@@ -19,7 +19,7 @@ public class BaseEndpoint {
                                 field("createdAt"),
                                 field("updatedAt"),
                                 field("commits", List.of(
-                                                Argument.arg("first", 100)
+                                                Argument.arg("first", 50)
                                         ),
                                         field("nodes",
                                                 field("commit",
@@ -29,7 +29,7 @@ public class BaseEndpoint {
                                         )
                                 ),
                                 field("files", List.of(
-                                                Argument.arg("first", 100)
+                                                Argument.arg("first", 50)
                                         ),
                                         field("nodes",
                                                 field("path")

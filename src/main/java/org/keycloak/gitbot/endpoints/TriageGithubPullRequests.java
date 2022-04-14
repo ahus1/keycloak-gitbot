@@ -54,7 +54,7 @@ public class TriageGithubPullRequests extends BaseEndpoint {
                                 List.of(
                                         Argument.arg("type", Results.SearchType.ISSUE),
                                         Argument.arg("query", "is:open is:pr archived:false repo:keycloak/keycloak draft:false sort:updated-desc no:assignee"),
-                                        Argument.arg("first", 100)
+                                        Argument.arg("first", 50)
                                 ),
                                 commonFields()
                         )
