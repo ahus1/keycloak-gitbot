@@ -33,22 +33,18 @@
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-scheduler</artifactId>
-      <version>${quarkus.platform.version}</version>
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-resteasy-jsonb</artifactId>
-      <version>${quarkus.platform.version}</version>
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-smallrye-graphql-client</artifactId>
-      <version>${quarkus.platform.version}</version>
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-rest-client-reactive</artifactId>
-      <version>${quarkus.platform.version}</version>
     </dependency>
     <dependency>
         <groupId>io.quarkiverse.freemarker</groupId>
@@ -72,11 +68,6 @@
     <dependency>
       <groupId>io.quarkiverse.githubapi</groupId>
       <artifactId>quarkus-github-api</artifactId>
-      <version>${quarkus-github-api.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>io.quarkiverse.githubapi</groupId>
-      <artifactId>quarkus-github-api-deployment</artifactId>
       <version>${quarkus-github-api.version}</version>
     </dependency>
   </dependencies>
