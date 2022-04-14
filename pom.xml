@@ -16,7 +16,7 @@
     <quarkus.platform.version>2.7.5.Final</quarkus.platform.version>
     <surefire-plugin.version>3.0.0-M5</surefire-plugin.version>
     <quarkus.freemarker.version>0.3.0</quarkus.freemarker.version>
-    <quarkus-github-api.version>1.303.1</quarkus-github-api.version>
+    <quarkus-github-api.version>1.303.2</quarkus-github-api.version>
   </properties>
   <dependencyManagement>
     <dependencies>
