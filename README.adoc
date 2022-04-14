@@ -1,4 +1,7 @@
 = Keycloak GitBot Project
+:github: https://github.com/ahus1/keycloak-gitbot
+
+image:{github}/workflows/Build/badge.svg?branch=main[Build Status (GitHub Workflow Build), link={github}/actions?query=workflow%3ABuild+branch%3Amain]
 
 == Purpose of this project
 
