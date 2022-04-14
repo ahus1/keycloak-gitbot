@@ -14,7 +14,7 @@
     <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
     <quarkus.platform.group-id>io.quarkus.platform</quarkus.platform.group-id>
     <quarkus.platform.version>2.7.5.Final</quarkus.platform.version>
-    <surefire-plugin.version>3.0.0-M5</surefire-plugin.version>
+    <surefire-plugin.version>3.0.0-M6</surefire-plugin.version>
     <quarkus.freemarker.version>0.3.0</quarkus.freemarker.version>
     <quarkus-github-api.version>1.303.1</quarkus-github-api.version>
   </properties>
