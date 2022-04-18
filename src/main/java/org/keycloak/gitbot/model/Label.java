@@ -3,8 +3,8 @@ package org.keycloak.gitbot.model;
 import java.util.Objects;
 
 public class Label {
-    public static Label AREA_DOCS = Label.of("area/docs");
-    public static Label AREA_TRANSLATIONS = Label.of("area/translations");
+    public static final Label AREA_DOCS = Label.of("area/docs");
+    public static final Label AREA_TRANSLATIONS = Label.of("area/translations");
     private final org.keycloak.gitbot.graphql.Label delegate;
 
     public Label(org.keycloak.gitbot.graphql.Label delegate) {
@@ -38,8 +38,12 @@ public class Label {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Label label = (Label) o;
         return Objects.equals(delegate.getName(), label.delegate.getName());
     }

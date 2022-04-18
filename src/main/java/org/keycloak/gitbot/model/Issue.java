@@ -1,7 +1,5 @@
 package org.keycloak.gitbot.model;
 
-import org.keycloak.gitbot.graphql.Labels;
-
 import java.util.List;
 import java.util.stream.Collectors;
 

@@ -12,7 +12,6 @@ import org.jboss.logging.Logger;
 import org.keycloak.gitbot.graphql.Result;
 import org.keycloak.gitbot.graphql.Results;
 import org.keycloak.gitbot.model.PullRequest;
-import org.kohsuke.github.*;
 
 import javax.inject.Inject;
 import javax.ws.rs.GET;
@@ -24,12 +23,11 @@ import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 import java.util.concurrent.ExecutionException;
 
 import static io.smallrye.graphql.client.core.Document.document;
 import static io.smallrye.graphql.client.core.Field.field;
-import static io.smallrye.graphql.client.core.Operation.*;
+import static io.smallrye.graphql.client.core.Operation.operation;
 
 
 @Path("/monitor")

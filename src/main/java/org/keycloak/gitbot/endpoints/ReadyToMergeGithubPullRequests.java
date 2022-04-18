@@ -7,7 +7,6 @@ import io.smallrye.graphql.client.Response;
 import io.smallrye.graphql.client.core.Argument;
 import io.smallrye.graphql.client.core.Document;
 import io.smallrye.graphql.client.dynamic.api.DynamicGraphQLClient;
-import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.jboss.logging.Logger;
 import org.keycloak.gitbot.graphql.Result;
 import org.keycloak.gitbot.graphql.Results;

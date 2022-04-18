@@ -17,8 +17,8 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class PullRequest {
-    private final Pattern KEYCLOAK_ISSUE = Pattern.compile("KEYCLOAK-\\d{3,4}");
-    private final static PrettyTime p = new PrettyTime();
+    private static final Pattern KEYCLOAK_ISSUE = Pattern.compile("KEYCLOAK-\\d{3,4}");
+    private static final PrettyTime PRETTY_TIME = new PrettyTime();
     private final org.keycloak.gitbot.graphql.PullRequest delegate;
 
     public Set<Command> getCommands() {
@@ -48,11 +48,11 @@ public class PullRequest {
     }
 
     public String getCreatedAtPretty() {
-        return p.format(delegate.getCreatedAt());
+        return PRETTY_TIME.format(delegate.getCreatedAt());
     }
 
     public String getUpdatedAtPretty() {
-        return p.format(delegate.getUpdatedAt());
+        return PRETTY_TIME.format(delegate.getUpdatedAt());
     }
 
     public Author getAuthor() {
@@ -105,8 +105,8 @@ public class PullRequest {
     }
 
     public boolean hasLinkedIssue() {
-        return delegate.getClosingIssuesReferences().getNodes().size() > 0 ||
-                hasLinkedJiraIssue();
+        return delegate.getClosingIssuesReferences().getNodes().size() > 0
+                || hasLinkedJiraIssue();
     }
 
     public boolean hasLinkedJiraIssue() {
@@ -122,8 +122,8 @@ public class PullRequest {
     }
 
     public boolean hasFirstReviewComment() {
-        return delegate.getComments() != null &&
-                delegate.getComments().getNodes().stream().anyMatch(comment -> comment.getBody().contains("Thanks for contributing to this project"));
+        return delegate.getComments() != null
+                && delegate.getComments().getNodes().stream().anyMatch(comment -> comment.getBody().contains("Thanks for contributing to this project"));
     }
 
     public void analyze(Configuration configuration) throws TemplateException, IOException {

@@ -18,6 +18,7 @@ bin/
 *.iws
 !.idea/externalDependencies.xml
 !.idea/runConfigurations
+!.idea/checkstyle-idea.xml
 
 # NetBeans
 nb-configuration.xml

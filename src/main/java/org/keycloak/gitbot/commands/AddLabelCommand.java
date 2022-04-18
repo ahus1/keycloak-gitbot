@@ -26,8 +26,8 @@ public class AddLabelCommand extends Command {
 
     public static void checkPullRequestContainsOnlyTranslations(PullRequest pullRequest) {
         if (pullRequest.getFiles().allMatch(file ->
-                file.getPath().startsWith("themes/src/main/resources-community/theme/") ||
-                        file.getPath().matches("themes/src/main/resources/theme/.*/messages_en.properties")) && pullRequest.getLabelGroup("area").size() == 0) {
+                file.getPath().startsWith("themes/src/main/resources-community/theme/")
+                        || file.getPath().matches("themes/src/main/resources/theme/.*/messages_en.properties")) && pullRequest.getLabelGroup("area").size() == 0) {
             new AddLabelCommand(pullRequest, Label.AREA_TRANSLATIONS);
         }
     }
@@ -45,8 +45,12 @@ public class AddLabelCommand extends Command {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         AddLabelCommand that = (AddLabelCommand) o;
         return Objects.equals(label, that.label);
     }
