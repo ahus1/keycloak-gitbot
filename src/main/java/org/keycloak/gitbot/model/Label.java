@@ -6,6 +6,7 @@ public class Label {
     public static final Label AREA_DOCS = Label.of("area/docs");
     public static final Label AREA_TRANSLATIONS = Label.of("area/translations");
     public static final Label AREA_QUARKUS = Label.of("area/quarkus");
+    public static final Label AREA_SAML = Label.of("area/saml");
     private final org.keycloak.gitbot.graphql.Label delegate;
 
     public Label(org.keycloak.gitbot.graphql.Label delegate) {

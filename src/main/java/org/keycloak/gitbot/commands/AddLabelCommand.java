@@ -37,9 +37,17 @@ public class AddLabelCommand extends Command {
             new AddLabelCommand(pullRequest, Label.AREA_TRANSLATIONS);
         }
     }
+
     public static void checkPullRequestContainsOnlyDocFilesAndHasNoArea(PullRequest pullRequest) {
         if (pullRequest.getFiles().allMatch(file -> file.getPath().endsWith(".adoc")) && pullRequest.getLabelGroup("area").size() == 0) {
             new AddLabelCommand(pullRequest, Label.AREA_DOCS);
+        }
+    }
+
+    public static void checkPullRequestTouchesSamlAndHasNoArea(PullRequest pullRequest) {
+        if (pullRequest.getFiles().anyMatch(file -> file.getPath().startsWith("services/src/main/java/org/keycloak/protocol/saml/")
+                && pullRequest.getLabelGroup("area").size() == 0)) {
+            new AddLabelCommand(pullRequest, Label.AREA_SAML);
         }
     }
 
