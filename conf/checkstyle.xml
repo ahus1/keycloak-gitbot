@@ -44,23 +44,6 @@
     <!-- See http://checkstyle.sf.net/config_whitespace.html -->
     <module name="FileTabCharacter"/>
 
-    <!-- Miscellaneous other checks.                   -->
-    <!-- See http://checkstyle.sf.net/config_misc.html -->
-    <module name="RegexpSingleline">
-        <property name="format" value="\s+$"/>
-        <property name="minimum" value="0"/>
-        <property name="maximum" value="0"/>
-        <property name="message" value="Line has trailing spaces."/>
-    </module>
-
-    <!-- Check for schema names in sql statements -->
-    <module name="RegexpSingleline">
-        <property name="format" value="(?i)(update|from|insert\s+into)\s+KONZ\_\w+\.\w+"/>
-        <property name="minimum" value="0"/>
-        <property name="maximum" value="0"/>
-        <property name="message" value="DB-Schemaname verwendet."/>
-    </module>
-
     <module name="SuppressWarningsFilter"/>
 
     <!--
