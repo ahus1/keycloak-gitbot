@@ -20,7 +20,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import java.io.IOException;
 import java.io.StringWriter;
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
@@ -48,28 +48,34 @@ public class MonitorGithubPullRequests extends BaseEndpoint {
     @GET
     @Produces(MediaType.TEXT_HTML)
     public String listPullRequest() throws IOException, ExecutionException, InterruptedException, TemplateException {
-        Document query = document(
+
+        List<PullRequest> pullrequests = new LinkedList<>();
+
+        processQuery(pullrequests, document(
                 operation(
                         field("search",
                                 List.of(
                                         Argument.arg("type", Results.SearchType.ISSUE),
                                         Argument.arg("query", "is:open is:pr assignee:" + gitHubLogin.trim() + " archived:false repo:keycloak/keycloak draft:false sort:updated-desc"), // reactions:>0
-                                        Argument.arg("first", 10)
+                                        Argument.arg("first", 50)
                                 ),
                                 commonFields()
                         )
                 )
-        );
-        Response response = dynamicClient.executeSync(query);
-        List<Result> search = response.getObject(Results.class, "search").getEdges();
+        ));
 
-        List<PullRequest> pullrequests = new ArrayList<>();
-
-        for (Result result : search) {
-            PullRequest pullRequest = new PullRequest(result.getNode());
-            pullRequest.analyze(configuration);
-            pullrequests.add(pullRequest);
-        }
+        processQuery(pullrequests, document(
+                operation(
+                        field("search",
+                                List.of(
+                                        Argument.arg("type", Results.SearchType.ISSUE),
+                                        Argument.arg("query", "is:open is:pr assignee:" + gitHubLogin.trim() + " archived:false repo:keycloak/keycloak user-review-requested:@me"),
+                                        Argument.arg("first", 50)
+                                ),
+                                commonFields()
+                        )
+                )
+        ));
 
         StringWriter stringWriter = new StringWriter();
         configuration.getTemplate("monitor.html.ftl").process(
@@ -79,5 +85,19 @@ public class MonitorGithubPullRequests extends BaseEndpoint {
                 ),
                 stringWriter);
         return stringWriter.toString();
+    }
+
+    private void processQuery(List<PullRequest> pullrequests, Document query) throws ExecutionException, InterruptedException, TemplateException, IOException {
+        Response response = dynamicClient.executeSync(query);
+        List<Result> search = response.getObject(Results.class, "search").getEdges();
+
+        for (Result result : search) {
+            PullRequest pullRequest = new PullRequest(result.getNode());
+            if (pullrequests.contains(pullRequest)) {
+                continue;
+            }
+            pullRequest.analyze(configuration);
+            pullrequests.add(pullRequest);
+        }
     }
 }

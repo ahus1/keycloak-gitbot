@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.time.ZonedDateTime;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -33,6 +34,27 @@ public class PullRequest {
 
     public Integer getNumber() {
         return delegate.getNumber();
+    }
+
+    /**
+     * Two PRs are the same if their number is the same.
+     * This holds true as long as we don't mix projects.
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        PullRequest that = (PullRequest) o;
+        return Objects.equals(delegate.getNumber(), that.delegate.getNumber());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(delegate);
     }
 
     public String getTitle() {
