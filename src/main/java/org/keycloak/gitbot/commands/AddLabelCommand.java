@@ -33,7 +33,10 @@ public class AddLabelCommand extends Command {
     public static void checkPullRequestContainsOnlyTranslations(PullRequest pullRequest) {
         if (pullRequest.getFiles().allMatch(file ->
                 file.getPath().startsWith("themes/src/main/resources-community/theme/")
-                        || file.getPath().matches("themes/src/main/resources/theme/.*/messages_en.properties")) && pullRequest.getLabelGroup("area").size() == 0) {
+                        || file.getPath().matches("themes/src/main/resources/theme/.*/messages_en.properties"))
+                && pullRequest.getFiles().allMatch(file ->
+                file.getPath().startsWith("themes/src/main/resources-community/theme/"))
+                && pullRequest.getLabelGroup("area").size() == 0) {
             new AddLabelCommand(pullRequest, Label.AREA_TRANSLATIONS);
         }
     }
