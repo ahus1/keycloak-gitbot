@@ -15,7 +15,7 @@
     <quarkus.platform.version>2.8.0.Final</quarkus.platform.version>
     <maven-surefire-plugin.version>3.0.0-M6</maven-surefire-plugin.version>
     <quarkus.freemarker.version>0.3.0</quarkus.freemarker.version>
-    <quarkus-github-api.version>1.303.2</quarkus-github-api.version>
+    <quarkus-github-api.version>1.304.0</quarkus-github-api.version>
     <checkstyle.version>10.1</checkstyle.version>
     <encoding>UTF-8</encoding>
     <maven-checkstyle-plugin.version>3.1.2</maven-checkstyle-plugin.version>
