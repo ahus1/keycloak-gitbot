@@ -12,6 +12,7 @@ insert_final_newline = true
 
 [*.java]
 indent_size = 4
+ij_java_continuation_indent_size = 8
 ij_java_use_single_class_imports = true
 
 [*.xml]
