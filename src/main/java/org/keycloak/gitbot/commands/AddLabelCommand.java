@@ -16,6 +16,12 @@ public class AddLabelCommand extends Command {
         pullRequest.addCommand(this);
     }
 
+    public static void checkPullRequestContainsQuarkusChangesAndHasNoArea(PullRequest pullRequest) {
+        if (pullRequest.getFiles().anyMatch(file -> file.getPath().startsWith("quarkus/")) && pullRequest.getLabelGroup("area").size() == 0) {
+            new AddLabelCommand(pullRequest, Label.AREA_QUARKUS);
+        }
+    }
+
     public String getDescription() {
         return "Add label '" + label.getName() + "'";
     }

@@ -152,6 +152,7 @@ public class PullRequest {
         AddLabelCommand.checkLinkedIssueHasAreaButPullRequestHasnt(this, "area");
         AddLabelCommand.checkLinkedIssueHasAreaButPullRequestHasnt(this, "kind");
         AddLabelCommand.checkPullRequestContainsOnlyDocFilesAndHasNoArea(this);
+        AddLabelCommand.checkPullRequestContainsQuarkusChangesAndHasNoArea(this);
         AddLabelCommand.checkPullRequestContainsOnlyTranslations(this);
         AddCommentCommand.checkSingleCommitAndLinkedIssue(this, configuration);
     }
