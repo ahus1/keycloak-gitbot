@@ -24,11 +24,11 @@
             </thead>
             <tbody>
             <#list pullrequests as pullrequest>
-                <tr>
+                <tr class="is-size-5">
                     <td>
                         <a href="https://github.com/keycloak/keycloak/pull/#{pullrequest.number}"
                            target="assistant_pr#{pullrequest.number}">${pullrequest.title}</a><br>
-                        <div class="is-size-7">
+                        <div class="is-size-6">
                             ##{pullrequest.number} opened by
                             <div class="dropdown is-hoverable pt-1 pb-1" style="vertical-align: revert">
                                 <span class="dropdown-trigger">
@@ -47,7 +47,7 @@
                                                     </figure>
                                                 </div>
                                                 <div class="column">${pullrequest.author.login}<br>
-                                                    <span class="is-size-7" style="white-space: nowrap"
+                                                    <span class="is-size-6" style="white-space: nowrap"
                                                           title="${pullrequest.authorAssociation.description}">${pullrequest.authorAssociation.role}</span>
                                                 </div>
                                             </div>
@@ -58,13 +58,13 @@
                             <span title="${pullrequest.createdAt}">${pullrequest.createdAtPretty}</span>,
                             updated <span title="${pullrequest.updatedAt}">${pullrequest.updatedAtPretty}</span>
                             <#list pullrequest.labels as label>
-                                <span class="tag" style="background: ${'#' + label.backgroundColor}; color: ${'#' + label.foregroundColor}">${label.name}</span>
+                                <span class="tag is-size-7" style="background: ${'#' + label.backgroundColor}; color: ${'#' + label.foregroundColor}">${label.name}</span>
                             </#list>
                         </div>
                         <#list pullrequest.commands as command>
                             <form data-hx-post="${command.url}">
                                 <div class="dropdown is-hoverable" style="vertical-align: revert">
-                                <button class="button is-small is-primary dropdown-trigger" data-hx-swap="outerHTML">
+                                <button class="button is-primary dropdown-trigger" data-hx-swap="outerHTML">
                                     ${command.description}
                                 </button>
                                 <#if command.comment??>
