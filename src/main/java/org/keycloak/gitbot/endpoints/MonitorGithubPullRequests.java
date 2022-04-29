@@ -20,6 +20,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import java.io.IOException;
 import java.io.StringWriter;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -51,31 +53,35 @@ public class MonitorGithubPullRequests extends BaseEndpoint {
 
         List<PullRequest> pullrequests = new LinkedList<>();
 
-        processQuery(pullrequests, document(
-                operation(
-                        field("search",
-                                List.of(
-                                        Argument.arg("type", Results.SearchType.ISSUE),
-                                        Argument.arg("query", "is:open is:pr assignee:" + gitHubLogin.trim() + " archived:false repo:keycloak/keycloak draft:false sort:updated-desc"), // reactions:>0
-                                        Argument.arg("first", 50)
-                                ),
-                                commonFields()
-                        )
-                )
-        ));
+        for (String project : Arrays.asList("keycloak", "keycloak-benchmark")) {
+            processQuery(project, pullrequests, document(
+                    operation(
+                            field("search",
+                                    List.of(
+                                            Argument.arg("type", Results.SearchType.ISSUE),
+                                            Argument.arg("query", "is:open is:pr assignee:" + gitHubLogin.trim() + " archived:false repo:keycloak/" + project + " draft:false sort:updated-desc"), // reactions:>0
+                                            Argument.arg("first", 50)
+                                    ),
+                                    commonFields()
+                            )
+                    )
+            ));
 
-        processQuery(pullrequests, document(
-                operation(
-                        field("search",
-                                List.of(
-                                        Argument.arg("type", Results.SearchType.ISSUE),
-                                        Argument.arg("query", "is:open is:pr assignee:" + gitHubLogin.trim() + " archived:false repo:keycloak/keycloak user-review-requested:@me"),
-                                        Argument.arg("first", 50)
-                                ),
-                                commonFields()
-                        )
-                )
-        ));
+            processQuery(project, pullrequests, document(
+                    operation(
+                            field("search",
+                                    List.of(
+                                            Argument.arg("type", Results.SearchType.ISSUE),
+                                            Argument.arg("query", "is:open is:pr assignee:" + gitHubLogin.trim() + " archived:false repo:keycloak/" + project + " user-review-requested:@me"),
+                                            Argument.arg("first", 50)
+                                    ),
+                                    commonFields()
+                            )
+                    )
+            ));
+        }
+
+        pullrequests.sort(Comparator.comparing(PullRequest::getUpdatedAt).reversed());
 
         StringWriter stringWriter = new StringWriter();
         configuration.getTemplate("monitor.html.ftl").process(
@@ -87,12 +93,12 @@ public class MonitorGithubPullRequests extends BaseEndpoint {
         return stringWriter.toString();
     }
 
-    private void processQuery(List<PullRequest> pullrequests, Document query) throws ExecutionException, InterruptedException, TemplateException, IOException {
+    private void processQuery(String project, List<PullRequest> pullrequests, Document query) throws ExecutionException, InterruptedException, TemplateException, IOException {
         Response response = dynamicClient.executeSync(query);
         List<Result> search = response.getObject(Results.class, "search").getEdges();
 
         for (Result result : search) {
-            PullRequest pullRequest = new PullRequest(result.getNode());
+            PullRequest pullRequest = new PullRequest(project, result.getNode());
             if (pullrequests.contains(pullRequest)) {
                 continue;
             }

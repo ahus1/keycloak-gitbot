@@ -26,7 +26,7 @@
             <#list pullrequests as pullrequest>
                 <tr class="is-size-5">
                     <td>
-                        <a href="https://github.com/keycloak/keycloak/pull/#{pullrequest.number}"
+                        <a href="https://github.com/keycloak/${pullrequest.project}/pull/#{pullrequest.number}"
                            target="assistant_pr#{pullrequest.number}">${pullrequest.title}</a><br>
                         <div class="is-size-6">
                             ##{pullrequest.number} opened by

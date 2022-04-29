@@ -62,7 +62,7 @@ public class ReadyToMergeGithubPullRequests extends BaseEndpoint {
         List<PullRequest> pullrequests = new ArrayList<>();
 
         for (Result result : search) {
-            PullRequest pullRequest = new PullRequest(result.getNode());
+            PullRequest pullRequest = new PullRequest("keycloak", result.getNode());
             pullRequest.analyze(configuration);
             pullrequests.add(pullRequest);
         }
