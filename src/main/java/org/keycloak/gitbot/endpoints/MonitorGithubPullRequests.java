@@ -59,7 +59,7 @@ public class MonitorGithubPullRequests extends BaseEndpoint {
                             field("search",
                                     List.of(
                                             Argument.arg("type", Results.SearchType.ISSUE),
-                                            Argument.arg("query", "is:open is:pr assignee:" + gitHubLogin.trim() + " archived:false repo:keycloak/" + project + " draft:false sort:updated-desc"), // reactions:>0
+                                            Argument.arg("query", "is:open is:pr assignee:" + gitHubLogin.trim() + " archived:false repo:keycloak/" + project + " sort:updated-desc"), // reactions:>0
                                             Argument.arg("first", 50)
                                     ),
                                     commonFields()
