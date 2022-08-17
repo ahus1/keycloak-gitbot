@@ -1,0 +1,10 @@
+name: 'Keycloak Bot'
+description: 'Bot reacting on comments'
+inputs:
+  token:
+    description: 'GITHUB_TOKEN or a repo scoped PAT.'
+    required: false
+    default: ${{ github.token }}
+runs:
+  using: 'node16'
+  main: 'dist/index.js'

@@ -43,3 +43,6 @@ nb-configuration.xml
 
 # cached GitHub schema
 github-schema.graphql
+
+# node
+node_modules
