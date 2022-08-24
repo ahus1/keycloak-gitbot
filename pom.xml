@@ -18,7 +18,7 @@
     <quarkus-github-api.version>1.308.0</quarkus-github-api.version>
     <checkstyle.version>10.3.2</checkstyle.version>
     <encoding>UTF-8</encoding>
-    <maven-checkstyle-plugin.version>3.1.2</maven-checkstyle-plugin.version>
+    <maven-checkstyle-plugin.version>3.2.0</maven-checkstyle-plugin.version>
     <maven-compiler-plugin.version>3.10.1</maven-compiler-plugin.version>
   </properties>
   <dependencyManagement>
