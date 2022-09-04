@@ -53,33 +53,31 @@ public class MonitorGithubPullRequests extends BaseEndpoint {
 
         List<PullRequest> pullrequests = new LinkedList<>();
 
-        for (String project : Arrays.asList("keycloak", "keycloak-benchmark")) {
-            processQuery(project, pullrequests, document(
-                    operation(
-                            field("search",
-                                    List.of(
-                                            Argument.arg("type", Results.SearchType.ISSUE),
-                                            Argument.arg("query", "is:open is:pr assignee:" + gitHubLogin.trim() + " archived:false repo:keycloak/" + project + " sort:updated-desc"), // reactions:>0
-                                            Argument.arg("first", 50)
-                                    ),
-                                    commonFields()
-                            )
-                    )
-            ));
+        processQuery(pullrequests, document(
+                operation(
+                        field("search",
+                                List.of(
+                                        Argument.arg("type", Results.SearchType.ISSUE),
+                                        Argument.arg("query", "is:open is:pr assignee:" + gitHubLogin.trim() + " archived:false org:keycloak sort:updated-desc"), // reactions:>0
+                                        Argument.arg("first", 50)
+                                ),
+                                commonFields()
+                        )
+                )
+        ));
 
-            processQuery(project, pullrequests, document(
-                    operation(
-                            field("search",
-                                    List.of(
-                                            Argument.arg("type", Results.SearchType.ISSUE),
-                                            Argument.arg("query", "is:open is:pr archived:false repo:keycloak/" + project + " user-review-requested:@me"),
-                                            Argument.arg("first", 50)
-                                    ),
-                                    commonFields()
-                            )
-                    )
-            ));
-        }
+        processQuery(pullrequests, document(
+                operation(
+                        field("search",
+                                List.of(
+                                        Argument.arg("type", Results.SearchType.ISSUE),
+                                        Argument.arg("query", "is:open is:pr archived:false org:keycloak user-review-requested:@me"),
+                                        Argument.arg("first", 50)
+                                ),
+                                commonFields()
+                        )
+                )
+        ));
 
         pullrequests.sort(Comparator.comparing(PullRequest::getUpdatedAt).reversed());
 
@@ -93,12 +91,12 @@ public class MonitorGithubPullRequests extends BaseEndpoint {
         return stringWriter.toString();
     }
 
-    private void processQuery(String project, List<PullRequest> pullrequests, Document query) throws ExecutionException, InterruptedException, TemplateException, IOException {
+    private void processQuery(List<PullRequest> pullrequests, Document query) throws ExecutionException, InterruptedException, TemplateException, IOException {
         Response response = dynamicClient.executeSync(query);
         List<Result> search = response.getObject(Results.class, "search").getEdges();
 
         for (Result result : search) {
-            PullRequest pullRequest = new PullRequest(project, result.getNode());
+            PullRequest pullRequest = new PullRequest(result.getNode());
             if (pullrequests.contains(pullRequest)) {
                 continue;
             }

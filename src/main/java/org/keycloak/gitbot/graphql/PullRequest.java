@@ -19,6 +19,8 @@ public class PullRequest {
 
     private Assignees assignees;
 
+    private Repository repository;
+
     public Integer getNumber() {
         return number;
     }
@@ -129,5 +131,13 @@ public class PullRequest {
 
     public void setCommits(Commits commits) {
         this.commits = commits;
+    }
+
+    public Repository getRepository() {
+        return repository;
+    }
+
+    public void setRepository(Repository repository) {
+        this.repository = repository;
     }
 }

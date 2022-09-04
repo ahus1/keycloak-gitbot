@@ -25,6 +25,12 @@
                     title,
                     body,
                     createdAt,
+                    repository {
+                        owner {
+                            login
+                        }
+                        name
+                    }
                     updatedAt,
                     files(first: 20) {
                         nodes {

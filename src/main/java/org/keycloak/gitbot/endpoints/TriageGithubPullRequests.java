@@ -62,7 +62,7 @@ public class TriageGithubPullRequests extends BaseEndpoint {
         List<PullRequest> pullrequests = new ArrayList<>();
 
         for (Result result : search) {
-            PullRequest pullRequest = new PullRequest("keycloak", result.getNode());
+            PullRequest pullRequest = new PullRequest(result.getNode());
             pullRequest.analyze(configuration);
             if (pullRequest.hasCommands()) {
                 pullrequests.add(pullRequest);

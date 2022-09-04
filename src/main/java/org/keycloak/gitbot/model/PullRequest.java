@@ -21,7 +21,6 @@ public class PullRequest {
     private static final Pattern KEYCLOAK_ISSUE = Pattern.compile("KEYCLOAK-\\d{3,4}");
     private static final PrettyTime PRETTY_TIME = new PrettyTime();
     private final org.keycloak.gitbot.graphql.PullRequest delegate;
-    private final String project;
 
     public Set<Command> getCommands() {
         return commands;
@@ -29,8 +28,7 @@ public class PullRequest {
 
     private final Set<Command> commands = new HashSet<>();
 
-    public PullRequest(String project, org.keycloak.gitbot.graphql.PullRequest delegate) {
-        this.project = project;
+    public PullRequest(org.keycloak.gitbot.graphql.PullRequest delegate) {
         this.delegate = delegate;
     }
 
@@ -160,7 +158,7 @@ public class PullRequest {
         AddCommentCommand.checkSingleCommitAndLinkedIssue(this, configuration);
     }
 
-    public String getProject() {
-        return project;
+    public String getRepositoryName() {
+        return delegate.getRepository().getName();
     }
 }

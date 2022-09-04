@@ -18,6 +18,9 @@ public class BaseEndpoint {
                                 field("body"),
                                 field("createdAt"),
                                 field("updatedAt"),
+                                field("repository",
+                                        field("name")
+                                ),
                                 field("commits", List.of(
                                                 Argument.arg("first", 50)
                                         ),
