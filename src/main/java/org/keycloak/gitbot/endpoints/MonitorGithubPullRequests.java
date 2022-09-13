@@ -8,7 +8,6 @@ import io.smallrye.graphql.client.core.Argument;
 import io.smallrye.graphql.client.core.Document;
 import io.smallrye.graphql.client.dynamic.api.DynamicGraphQLClient;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
-import org.jboss.logging.Logger;
 import org.keycloak.gitbot.graphql.Result;
 import org.keycloak.gitbot.graphql.Results;
 import org.keycloak.gitbot.model.PullRequest;
@@ -20,7 +19,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import java.io.IOException;
 import java.io.StringWriter;
-import java.util.Arrays;
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
@@ -34,8 +32,6 @@ import static io.smallrye.graphql.client.core.Operation.operation;
 
 @Path("/monitor")
 public class MonitorGithubPullRequests extends BaseEndpoint {
-
-    private static final Logger LOG = Logger.getLogger(MonitorGithubPullRequests.class);
 
     @Inject
     @GraphQLClient("github")
