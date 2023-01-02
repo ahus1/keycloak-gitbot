@@ -16,7 +16,7 @@
     <maven-surefire-plugin.version>3.0.0-M7</maven-surefire-plugin.version>
     <quarkus.freemarker.version>0.3.0</quarkus.freemarker.version>
     <quarkus-github-api.version>1.313.1</quarkus-github-api.version>
-    <checkstyle.version>10.4</checkstyle.version>
+    <checkstyle.version>10.6.0</checkstyle.version>
     <encoding>UTF-8</encoding>
     <maven-checkstyle-plugin.version>3.2.0</maven-checkstyle-plugin.version>
     <maven-compiler-plugin.version>3.10.1</maven-compiler-plugin.version>
