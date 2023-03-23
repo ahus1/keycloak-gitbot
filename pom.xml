@@ -13,7 +13,7 @@
     <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
     <quarkus.platform.group-id>io.quarkus.platform</quarkus.platform.group-id>
     <quarkus.platform.version>2.12.0.Final</quarkus.platform.version>
-    <maven-surefire-plugin.version>3.0.0-M7</maven-surefire-plugin.version>
+    <maven-surefire-plugin.version>3.0.0</maven-surefire-plugin.version>
     <quarkus.freemarker.version>0.3.0</quarkus.freemarker.version>
     <quarkus-github-api.version>1.308.0</quarkus-github-api.version>
     <checkstyle.version>10.3.3</checkstyle.version>
